@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class GameRunner {
+public class GameRunner {
+    public static void main(String[] args) {
+        Logic logic = new Logic();
+    }
 }
