@@ -9,7 +9,7 @@ public class Board {
 
     public Board() {}
 
-    public void addNumToBoard(String position, int num) {
+    public void addNumToBoard(int position, int num) {
         String fixedPosition = "(" + position + ")";
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
@@ -21,7 +21,47 @@ public class Board {
     }
 
     public int getRowsSum() {
+        int sum = 0;
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length - 1; j++) {
+                if (board[i][j].equals(board[i][j + 1])) {
+                    sum += positionToInt(board[i][j]) + positionToInt(board[i][j]);
+                    int startIdx = j + 2;
+                    while (startIdx < board[0].length - 1) {
+                        if (board[i][j].equals(board[i][startIdx])) {
+                            sum += positionToInt(board[i][j]);
+                        }
+                        else {
+                            break;
+                        }
+                        startIdx++;
+                    }
+                }
+            }
+        }
+        return sum;
+    }
 
+    public int getColumnsSum() {
+        int sum = 0;
+        for (int i = 0; i < board[0].length; i++) {
+            for (int j = 0; j < board.length - 1; j++) {
+                if (board[j][i].equals(board[j + 1][i])) {
+                    sum += positionToInt(board[j][i]) + positionToInt(board[j][i]);
+                    int startIdx = j + 2;
+                    while (startIdx < board.length - 1) {
+                        if (board[j][i].equals(board[j][startIdx])) {
+                            sum += positionToInt(board[j][i]);
+                        }
+                        else {
+                            break;
+                        }
+                        startIdx++;
+                    }
+                }
+            }
+        }
+        return sum;
     }
 
     public void printBoard() {
@@ -32,5 +72,9 @@ public class Board {
 
     public int getBoardLength() {
         return board.length;
+    }
+
+    public int positionToInt(String position) {
+        return Integer.parseInt(position);
     }
 }
